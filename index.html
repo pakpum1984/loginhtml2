@@ -164,7 +164,7 @@
           <label for="password">Password</label>
           <input type="password" id="password" name="password" required>
         </div>
-        <button id="button" type="button" onclick="submitForm()">Login</button>
+        <button id="button" type="button" onclick="loginForm()">Login</button>
         <br> <br> <br>
         <center>
           <p>ยังไม่ได้ลงทะเบียน <a href="##" data-bs-toggle="modal" data-bs-target="#myModal">ลงทะบียนที่นี่</a></p>
@@ -175,15 +175,6 @@
 
   <section id="page2" style="display: none;">
 
-    <!-- <div class="input-group">
-        <label for="username">ชื่อสกุล</label>
-        <input type="text" id="namebook" name="namebook" required>
-      </div>
-      <div class="input-group">
-        <label for="username">แผนก</label>
-        <input type="text" id="namedep" name="namedep" required>
-      </div> -->
-
 
     <div class="container" id="containerreg">
       <button type="button" onclick="logout()" class="btn btn-danger" style="float:right;">Logout</button>
@@ -192,18 +183,32 @@
       <form id="bookmyForm" method="POST" onsubmit="booksubmitForm(); return false;" class="row g-2">
 
         <div class="col-12 col-md-6 mb-2">
-          <div class="form-group"> <label>&nbspชื่อสกุล</label>
-
+          <div class="form-group"> <label>ชื่อสกุล</label>
             <input type="text" class="form-control" id="namebook" name="namebook" style="color:blue;" required>
           </div>
         </div>
 
-        <div class="col-12 col-md-6 mb-2">
-          <div class="form-group"> <label>&nbspแผนก</label>
-
+        <div class="col-12 col-md-3 mb-2">
+          <div class="form-group"> <label>แผนก</label>
             <input type="text" class="form-control" id="namedep" name="namedep" style="color:blue;" required>
+          </div>
+        </div>
 
+        <div class="col-12 col-md-3 mb-2">
+          <div class="form-group"> <label>อายุ</label>
+            <input type="tel" class="form-control" id="nameage" name="nameage" style="color:blue;" required>
+          </div>
+        </div>
 
+        <div class="col-12 col-md-6 mb-2">
+          <div class="form-group"> <label>เบอร์โทร</label>
+            <input type="tel" class="form-control" id="nametel" name="nametel" style="color:blue;" required>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 mb-2">
+          <div class="form-group"> <label>อีเมล์</label>
+            <input type="email" class="form-control" id="nameemail" name="nameemail" style="color:blue;" required>
           </div>
         </div>
 
@@ -211,7 +216,7 @@
 
 
         <div class="d-flex justify-content-center mt-4">
-          <button type="submit" class="btn bg-primary col-12 text-white"><i class="fas fa-paper-plane"></i>
+          <button type="button" onclick="booksubmitForm()" class="btn bg-primary col-12 text-white"><i class="fas fa-paper-plane"></i>
             บันทึกข้อมูล</button>
         </div>
         <hr>
@@ -231,26 +236,9 @@
 
   <script>
 
+    var googleScriptUrl = 'https://script.google.com/macros/s/AKfycbzOyYShJS43EU0mdenRCxRAHJBApJ5uFk8tO1atjGcgkHVW4pQuiYE0-4b2QCJTDNLQmw/exec';
 
-    // function fetchData(formData, successCallback, errorCallback) {
-    //   fetch('https://script.google.com/macros/s/AKfycbzOyYShJS43EU0mdenRCxRAHJBApJ5uFk8tO1atjGcgkHVW4pQuiYE0-4b2QCJTDNLQmw/exec', {
-    //     method: 'POST',
-    //     body: formData
-    //   })
-    //     .then(response => {
-    //       if (response.ok) {
-    //         return response.json();
-    //       } else {
-    //         throw new Error('An error occurred while sending the data');
-    //       }
-    //     })
-    //     .then(data => {
-    //       successCallback(data);
-    //     })
-    //     .catch(error => {
-    //       errorCallback(error);
-    //     });
-    // }
+
 
 
     function booksubmitForm() {
@@ -265,46 +253,93 @@
       // Fetch data from the form
       var namebook = document.getElementById('namebook').value;
       var namedep = document.getElementById('namedep').value;
+      var nameage = document.getElementById('nameage').value;
+      var nametel = document.getElementById('nametel').value;
+      var nameemail = document.getElementById('nameemail').value;
+ 
+      
+        if(namebook == ""){
+              Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: '<h4>กรุณาตั้งกรอกชื่อของท่าน</h4>',
+                showConfirmButton: true,
+                confirmButtonText: 'OK',
+              });
+              return;
+            }else if(namedep == ""){
+                Swal.fire({
+                  position: 'center',
+                  icon: 'error',
+                  title: '<h4>กรุณากรอกแผนกของท่าน</h4>',
+                  showConfirmButton: true,
+                  confirmButtonText: 'OK',
+                });
+                return;
+              }else if(nameage == ""){
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: '<h4>กรุณากรอกอายุของท่าน</h4>',
+            showConfirmButton: true,
+            confirmButtonText: 'OK',
+          });
+          return;
+        }else if(nametel == ""){
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: '<h4>กรุณากรอกเบอร์โทรของท่าน</h4>',
+            showConfirmButton: true,
+            confirmButtonText: 'OK',
+          });
+          return;
+        }else if(nameemail == ""){
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: '<h4>กรุณากรอกอีเมล์ของท่าน</h4>',
+          showConfirmButton: true,
+          confirmButtonText: 'OK',
+        });
+        return;
+      }
+      var formData = new FormData(document.getElementById("bookmyForm"));
+      formData.append('action', 'submitForm'); // เพิ่ม key "action" เพื่อบ่งบอกว่าเป็นการ submitForm
 
-
-      // Create a FormData object to send the data
-      var formData = new FormData();
-      formData.append('namebook', namebook);
-      formData.append('namedep', namedep);
-
-
-      fetch('https://script.google.com/macros/s/AKfycbzOyYShJS43EU0mdenRCxRAHJBApJ5uFk8tO1atjGcgkHVW4pQuiYE0-4b2QCJTDNLQmw/exec', {
+      fetch(googleScriptUrl, {
         method: 'POST',
         body: formData
       })
-        .then(response => response.text())
-        .then(data => {
-          // Handle the successful response
-          console.log(data);
-          if (data == "false") {
-            document.getElementById('bookmyForm').reset();
-            Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: '<h4>บันทึกข้อมูลสำเร็จ</h4>',
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          } else {
-            Swal.fire({
-              position: 'center',
-              icon: 'error',
-              title: '<h4>มีข้อผิดพลาด</h4>',
-              showConfirmButton: true,
-              confirmButtonText: 'OK',
-            });
-          }
-        })
-        .catch(error => {
-          // Handle the error
-          console.error('Error:', error);
-        });
+      .then(response => response.text())
+      .then(data => {
+        // Handle the successful response
+        console.log(data);
+        if (data == "true") {
+          document.getElementById('bookmyForm').reset();
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: '<h4>บันทึกข้อมูลสำเร็จ</h4>',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } else {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: '<h4>มีข้อผิดพลาด</h4>',
+            showConfirmButton: true,
+            confirmButtonText: 'OK',
+          });
+        }
+      })
+      .catch(error => {
+        // Handle the error
+        console.error('Error:', error);
+      });
     }
+
 
 
 
@@ -334,11 +369,50 @@
       var department = document.getElementById('department').value;
       var regstatus = document.getElementById('regstatus').value;
 
+ 
+
+          if(regUsername == ""){
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: '<h4>กรุณาตั้งUsernameของท่าน</h4>',
+              showConfirmButton: true,
+              confirmButtonText: 'OK',
+            });
+            return;
+          }else if(regPassword == ""){
+              Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: '<h4>กรุณาตั้งPasswordของท่าน</h4>',
+                showConfirmButton: true,
+                confirmButtonText: 'OK',
+              });
+              return;
+            }else if(fullName == ""){
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: '<h4>กรุณากรอกชื่อสกุลของท่าน</h4>',
+          showConfirmButton: true,
+          confirmButtonText: 'OK',
+        });
+        return;
+      }else if(department == ""){
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: '<h4>กรุณากรอกแผนกของท่าน</h4>',
+          showConfirmButton: true,
+          confirmButtonText: 'OK',
+        });
+        return;
+      }
       // Create a FormData object to send the data
       var formData = new FormData(document.getElementById("registerForm"));
       formData.append('action', 'register'); // เพิ่ม key "action" เพื่อบ่งบอกว่าเป็นการ register
 
-      fetch('https://script.google.com/macros/s/AKfycbzOyYShJS43EU0mdenRCxRAHJBApJ5uFk8tO1atjGcgkHVW4pQuiYE0-4b2QCJTDNLQmw/exec', {
+      fetch(googleScriptUrl, {
         method: 'POST',
         body: formData
       })
@@ -363,7 +437,7 @@
     }
 
 
-    function submitForm() {
+    function loginForm() {
       event.preventDefault();
       Swal.fire({
         position: 'center',
@@ -371,10 +445,34 @@
         showConfirmButton: false,
       });
       Swal.showLoading();
+
+      var checkusername = document.getElementById('username').value;
+      var checkpassword = document.getElementById('password').value;
+
+      if(checkusername == ""){
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: '<h4>กรุณากรอกUsernameของท่าน</h4>',
+          showConfirmButton: true,
+          confirmButtonText: 'OK',
+        });
+        return;
+      }else if(checkpassword == ""){
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: '<h4>กรุณากรอกPasswordของท่าน</h4>',
+            showConfirmButton: true,
+            confirmButtonText: 'OK',
+          });
+          return;
+        }
+      
       var formData = new FormData(document.getElementById("loginForm"));
       formData.append('action', 'loginhtml'); // เพิ่ม key "action" เพื่อบ่งบอกว่าเป็นการ loginhtml
 
-      fetch('https://script.google.com/macros/s/AKfycbzOyYShJS43EU0mdenRCxRAHJBApJ5uFk8tO1atjGcgkHVW4pQuiYE0-4b2QCJTDNLQmw/exec', {
+      fetch(googleScriptUrl, {
         method: 'POST',
         body: formData
       })
