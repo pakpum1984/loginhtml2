@@ -28,9 +28,9 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     } */
 
-    #container {
+    #cardlogin {
       max-width: 400px;
-      margin: 20vh auto;
+      margin: 10vh auto;
       padding: 30px;
       background-color: #fff;
       border-radius: 8px;
@@ -175,7 +175,7 @@
 
   <nav class="navbar navbar-expand-lg navbar bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="##" style="color:white;">Navbar</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -189,10 +189,11 @@
   </nav>
   
   <section id="page1">
-    <div class="container" id="container">
+    <div class="container">
+       <div class="card" id="cardlogin">
       <form id="loginForm" method="POST" onsubmit="submitForm(); return false;">
         <center>
-          <h2>Login HTML</h2>
+          <h2>Login HTML 2</h2>
         </center>
         <div class="input-group">
           <label for="username">Username</label>
@@ -209,6 +210,7 @@
         </center>
       </form>
     </div>
+      </div>
   </section>
 
   <section id="page2" style="display: none;">
