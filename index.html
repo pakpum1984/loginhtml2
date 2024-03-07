@@ -136,7 +136,7 @@
 
             <input type="text" id="regstatus" name="regstatus" value="user" hidden>
 
-            <button id="button" type="submit">Register</button>
+            <button id="button"  type="button" onclick="registerUser()">Register</button>
           </form>
 
         </div>
@@ -152,7 +152,7 @@
 
   <section id="page1">
     <div class="container" id="container">
-      <form id="loginForm" method="POST" onsubmit="submitForm(); return false;">
+      <form id="loginForm" method="POST"  onsubmit="submitForm(); return false;">
         <center>
           <h2>Login HTML 2</h2>
         </center>
@@ -164,7 +164,7 @@
           <label for="password">Password</label>
           <input type="password" id="password" name="password" required>
         </div>
-        <button id="button" type="submit">Login</button>
+        <button id="button" type="button" onclick="submitForm()">Login</button>
         <br> <br> <br>
         <center>
           <p>ยังไม่ได้ลงทะเบียน <a href="##" data-bs-toggle="modal" data-bs-target="#myModal">ลงทะบียนที่นี่</a></p>
@@ -232,25 +232,25 @@
   <script>
 
 
-    function fetchData(formData, successCallback, errorCallback) {
-      fetch('https://script.google.com/macros/s/AKfycbzOyYShJS43EU0mdenRCxRAHJBApJ5uFk8tO1atjGcgkHVW4pQuiYE0-4b2QCJTDNLQmw/exec', {
-        method: 'POST',
-        body: formData
-      })
-        .then(response => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw new Error('An error occurred while sending the data');
-          }
-        })
-        .then(data => {
-          successCallback(data);
-        })
-        .catch(error => {
-          errorCallback(error);
-        });
-    }
+    // function fetchData(formData, successCallback, errorCallback) {
+    //   fetch('https://script.google.com/macros/s/AKfycbzOyYShJS43EU0mdenRCxRAHJBApJ5uFk8tO1atjGcgkHVW4pQuiYE0-4b2QCJTDNLQmw/exec', {
+    //     method: 'POST',
+    //     body: formData
+    //   })
+    //     .then(response => {
+    //       if (response.ok) {
+    //         return response.json();
+    //       } else {
+    //         throw new Error('An error occurred while sending the data');
+    //       }
+    //     })
+    //     .then(data => {
+    //       successCallback(data);
+    //     })
+    //     .catch(error => {
+    //       errorCallback(error);
+    //     });
+    // }
 
 
     function booksubmitForm() {
@@ -308,9 +308,17 @@
 
 
 
-    // ใน registerUser()
     function registerUser() {
-
+      var regPasswordValue = document.getElementById('regPassword').value;
+      if (!/^[a-zA-Z0-9]*$/.test(regPasswordValue)) {
+        // แสดง SweetAlert เพื่อแจ้งเตือนให้กรอกภาษาอังกฤษและตัวเลขเท่านั้น
+        Swal.fire({
+          icon: 'error',
+          title: 'ผิดพลาด',
+          text: 'กรุณากรอกภาษาอังกฤษและตัวเลขเท่านั้นในช่อง Password'
+        });
+        return; // ไม่ต้องทำอะไรเพิ่มเติม และหยุดการทำงานของฟังก์ชัน
+      }
       event.preventDefault();
       Swal.fire({
         position: 'center',
@@ -318,6 +326,7 @@
         showConfirmButton: false,
       });
       Swal.showLoading();
+
       // Fetch data from the form
       var regUsername = document.getElementById('regUsername').value;
       var regPassword = document.getElementById('regPassword').value;
@@ -326,38 +335,34 @@
       var regstatus = document.getElementById('regstatus').value;
 
       // Create a FormData object to send the data
-      var formData = new FormData();
-      formData.append('regUsername', regUsername);
-      formData.append('regPassword', regPassword);
-      formData.append('fullName', fullName);
-      formData.append('department', department);
-      formData.append('regstatus', regstatus);
+      var formData = new FormData(document.getElementById("registerForm"));
+      formData.append('action', 'register'); // เพิ่ม key "action" เพื่อบ่งบอกว่าเป็นการ register
 
-      // Call the fetchData function to send the data to the server
-      fetchData(formData,
-        function (data) {
-          // Handle the successful response
-          console.log(data);
-          Swal.fire({
-            position: 'center',
-            icon: 'info',
-            title: '<h4>ลงทะเบียนสำเร็จ</h4>',
-            showConfirmButton: false,
-            //confirmButtonText: 'ปิด',
-            timer: 1500,
-          });
-          document.getElementById('registerForm').reset();
-          document.getElementById('registerFormmodal').click();
-        },
-        function (error) {
-          // Handle the error
-          console.error('Error:', error);
-        }
-      );
+      fetch('https://script.google.com/macros/s/AKfycbzOyYShJS43EU0mdenRCxRAHJBApJ5uFk8tO1atjGcgkHVW4pQuiYE0-4b2QCJTDNLQmw/exec', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json()) // แปลง response เป็น JSON
+      .then(data => {
+        // Handle the successful response
+        console.log(data);
+        Swal.fire({
+          position: 'center',
+          icon: 'info',
+          title: '<h4>ลงทะเบียนสำเร็จ</h4>',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        document.getElementById('registerForm').reset();
+        document.getElementById('registerFormmodal').click();
+      })
+      .catch(error => {
+        // Handle the error
+        console.error('Error:', error);
+      });
     }
 
 
-    // ใน submitForm()
     function submitForm() {
       event.preventDefault();
       Swal.fire({
@@ -366,60 +371,59 @@
         showConfirmButton: false,
       });
       Swal.showLoading();
+      var formData = new FormData(document.getElementById("loginForm"));
+      formData.append('action', 'loginhtml'); // เพิ่ม key "action" เพื่อบ่งบอกว่าเป็นการ loginhtml
 
-      // Fetch data from the form
-      var formData = new FormData();
-      formData.append('username', document.getElementById('username').value);
-      formData.append('password', document.getElementById('password').value);
-
-      // Call the fetchData function to send the data to the server
-      fetchData(formData,
-        function (data) {
-          // Handle the successful response
-          console.log(data);
-          if (data !== false) {
-            var username = data.username;
-            var password = data.password;
-            var fname = data.name;
-            var dep = data.dep;
-            var status = data.status;
-
-            if (status === 'user') {
-              localStorage.setItem('status', status);
-              localStorage.setItem('fname', fname);
-              localStorage.setItem('dep', dep);
-
-              Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: '<h4>ยินดีต้อนรับ<br>คุณ ' + fname + '</h4>',
-                showConfirmButton: false,
-                //confirmButtonText: 'กดปิด',
-                timer: 1500,
-              });
-
-              $('#page1').hide();
-              $('#page2').show();
-              $('#namebook').val(fname);
-              $('#namedep').val(dep);
-            }
-          } else {
-            // แสดงข้อความเมื่อไม่พบข้อมูล
+      fetch('https://script.google.com/macros/s/AKfycbzOyYShJS43EU0mdenRCxRAHJBApJ5uFk8tO1atjGcgkHVW4pQuiYE0-4b2QCJTDNLQmw/exec', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json()) // แปลง response เป็น JSON
+      .then(data => {
+        if (data !== false) {
+          var username = data.username;
+          var password = data.password;
+          var fname = data.name;
+          var dep = data.dep;
+          var status = data.status;
+          if (status === 'user') {
+            localStorage.setItem('status', status);
+            localStorage.setItem('fname', fname);
+            localStorage.setItem('dep', dep);
             Swal.fire({
               position: 'center',
-              icon: 'error',
-              title: '<h4>ไม่พบข้อมูลที่ท่านกรอกในระบบ</h4>',
-              showConfirmButton: true,
-              confirmButtonText: 'กดปิด',
+              icon: 'success',
+              title: '<h4>ยินดีต้อนรับ<br>คุณ ' + fname + '</h4>',
+              showConfirmButton: false,
+              timer: 1500,
             });
+            $('#page1').hide();
+            $('#page2').show();
+            $('#namebook').val(fname);
+            $('#namedep').val(dep);
           }
-        },
-        function (error) {
-          // Handle the error
-          console.error('Error:', error);
+        } else {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: '<h4>ไม่พบข้อมูลที่ท่านกรอกในระบบ</h4>',
+            showConfirmButton: true,
+            confirmButtonText: 'กดปิด',
+          });
         }
-      );
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        Swal.fire({ // แสดงข้อความเมื่อมีข้อผิดพลาด
+          position: 'center',
+          icon: 'error',
+          title: '<h4>มีข้อผิดพลาดเกิดขึ้น</h4>',
+          showConfirmButton: true,
+          confirmButtonText: 'กดปิด',
+        });
+      });
     }
+
 
     function logout() {
       Swal.fire({
