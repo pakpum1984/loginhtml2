@@ -154,7 +154,7 @@
     <div class="container" id="container">
       <form id="loginForm" method="POST" onsubmit="submitForm(); return false;">
         <center>
-          <h2>Login HTML 2</h2>
+          <h2>Login HTML</h2>
         </center>
         <div class="input-group">
           <label for="username">Username</label>
@@ -430,28 +430,38 @@
       formData.append('action', 'register'); // เพิ่ม key "action" เพื่อบ่งบอกว่าเป็นการ register
 
       fetch(googleScriptUrl, {
-        method: 'POST',
-        body: formData
-      })
-        .then(response => response.json()) // แปลง response เป็น JSON
-        .then(data => {
-          // Handle the successful response
-          console.log(data);
-          Swal.fire({
-            position: 'center',
-            icon: 'info',
-            title: '<h4>ลงทะเบียนสำเร็จ</h4>',
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          document.getElementById('registerForm').reset();
-          document.getElementById('registerFormmodal').click();
+          method: 'POST',
+          body: formData
         })
-        .catch(error => {
-          // Handle the error
-          console.error('Error:', error);
-        });
-    }
+          .then(response => response.text()) // แปลง response เป็น text
+          .then(data => {
+            // Handle the successful response
+            console.log(data);
+            if (data == "true") {
+              document.getElementById('registerForm').reset();
+              document.getElementById('registerFormmodal').click();
+              Swal.fire({
+                position: 'center',
+                icon: 'info',
+                title: '<h4>ลงทะเบียนสำเร็จ</h4>',
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            } else {
+              Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: '<h4>ชื่อสกุลนี้มีการลงทะเบียนแล้ว</h4>',
+                showConfirmButton: true,
+                confirmButtonText: 'OK',
+              });
+            }
+          })
+          .catch(error => {
+            // Handle the error
+            console.error('Error:', error);
+          });
+      }
 
 
     function loginForm() {
