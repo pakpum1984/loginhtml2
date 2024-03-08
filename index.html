@@ -175,7 +175,7 @@
 
   <nav class="navbar navbar-expand-lg navbar bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="##" style="color:white;">HTML TO APPSCRIPT</a>
+      <a class="navbar-brand" href="##" style="color:white;">HTML TO APPSCRIPT1</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -193,7 +193,7 @@
        <div class="card" id="cardlogin">
       <form id="loginForm" method="POST" onsubmit="submitForm(); return false;">
         <center>
-          <h2>Login</h2>
+          <h2>Login HTML</h2>
         </center>
         <div class="input-group">
           <label for="username">Username</label>
@@ -794,7 +794,7 @@
 
       // Create a FormData object to send the data
       var formData = new FormData(document.getElementById("registerForm"));
-      formData.append('action', 'register'); // เพิ่ม key "action" เพื่อบ่งบอกว่าเป็นการ register
+      formData.append('action', 'registeradmin'); // เพิ่ม key "action" เพื่อบ่งบอกว่าเป็นการ register
 
       fetch(googleScriptUrl, {
           method: 'POST',
@@ -864,7 +864,7 @@
       }
 
       var formData = new FormData(document.getElementById("loginForm"));
-      formData.append('action', 'loginhtml'); // เพิ่ม key "action" เพื่อบ่งบอกว่าเป็นการ loginhtml
+      formData.append('action', 'loginhtmladmin'); // เพิ่ม key "action" เพื่อบ่งบอกว่าเป็นการ loginhtml
 
       fetch(googleScriptUrl, {
         method: 'POST',
