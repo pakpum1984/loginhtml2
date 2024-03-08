@@ -982,22 +982,22 @@
         $('#carduser').hide();
         $('#cardgeneraluser').hide();
         $('#page2').show();
-        $('#namebookadmin').val(fname);
-        $('#namedepadmin').val(dep);
+        $('#namebookadmin').val(storedFname);
+        $('#namedepadmin').val(storedDep);
       }else if (storedStatus === 'user' && storedFname && storedDep) {
         $('#page1').hide();
         $('#cardadmin').hide();
         $('#cardgeneraluser').hide();
         $('#page2').show();
-        $('#namebookuser').val(fname);
-        $('#namedepuser').val(dep);
+        $('#namebookuser').val(storedFname);
+        $('#namedepuser').val(storedDep);
         }else if (storedStatus === 'generaluser' && storedFname && storedDep) {
         $('#page1').hide();
         $('#cardadmin').hide();
         $('#carduser').hide();
         $('#page2').show();
-        $('#namebookgeneraluser').val(fname);
-        $('#namedepgeneraluser').val(dep);
+        $('#namebookgeneraluser').val(storedFname);
+        $('#namedepgeneraluser').val(storedDep);
       }
     });
   </script>
