@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,27 +7,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+   <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
     integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <title>Login Page HTML</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: "Prompt", sans-serif;
       background-color: #f4f4f4;
     }
 
-    /* .container {
-      max-width: 400px;
-      margin: auto;
-      margin-top: 20vh;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    } */
 
     #cardlogin {
       max-width: 400px;
@@ -107,9 +98,7 @@
       background-color: #45a049;
     }
 
-    /* #page2 {
-      text-align: center;
-    } */
+
 
     #button#logoutBtn {
       margin-top: 20px;
@@ -145,20 +134,20 @@
             </div>
             <div class="input-group">
               <label for="regPassword">Password</label>
-              <input type="password" id="regPassword" name="regPassword" maxlength="6" required>
+              <input type="password" id="regPassword" name="regPassword" minlength="6" maxlength="6" required>
             </div>
             <div class="input-group">
-              <label for="fullName">Full Name</label>
+              <label for="fullName">ชื่อ นามสกุล</label>
               <input type="text" id="fullName" name="fullName" required>
             </div>
             <div class="input-group">
-              <label for="department">Department</label>
+              <label for="department">แผนก</label>
               <input type="text" id="department" name="department" required>
             </div>
 
             <input type="text" id="regstatus" name="regstatus" value="user" hidden>
 
-            <button id="button" type="button" onclick="registerUser()">Register</button>
+            <button id="button" type="submit" onclick="registerUser()">Register</button>
           </form>
 
         </div>
@@ -175,7 +164,7 @@
 
   <nav class="navbar navbar-expand-lg navbar bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="##" style="color:white;">HTML TO APPSCRIPT1</a>
+      <a class="navbar-brand" href="##" style="color:white;">HTML TO APPSCRIPT</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -191,7 +180,7 @@
   <section id="page1">
     <div class="container">
        <div class="card" id="cardlogin">
-      <form id="loginForm" method="POST" onsubmit="submitForm(); return false;">
+      <form id="loginForm" method="POST" onsubmit="loginForm(); return false;">
         <center>
           <h2>Login HTML</h2>
         </center>
@@ -201,9 +190,9 @@
         </div>
         <div class="input-group">
           <label for="password">Password</label>
-          <input type="password" id="password" name="password" maxlength="6" required>
+          <input type="password" id="password" name="password" minlength="6" maxlength="6" required>
         </div>
-        <button id="button" type="button" onclick="loginForm()">Login</button>
+        <button id="button" type="submit" onclick="loginForm()">Login</button>
         <br> <br> <br>
         <center>
           <p>ยังไม่ได้ลงทะเบียน <a href="##" data-bs-toggle="modal" data-bs-target="#myModal">ลงทะบียนที่นี่</a></p>
@@ -257,7 +246,7 @@
 
 
         <div class="d-flex justify-content-center mt-4">
-          <button type="button" onclick="booksubmitFormadmin()" class="btn bg-primary col-12 text-white"><i
+          <button type="submit" onclick="booksubmitFormadmin()" class="btn bg-primary col-12 text-white"><i
               class="fas fa-paper-plane"></i>
             บันทึกข้อมูล</button>
         </div>
@@ -314,7 +303,7 @@
 
 
         <div class="d-flex justify-content-center mt-4">
-          <button type="button" onclick="booksubmitFormuser()" class="btn bg-primary col-12 text-white"><i
+          <button type="submit" onclick="booksubmitFormuser()" class="btn bg-primary col-12 text-white"><i
               class="fas fa-paper-plane"></i>
             บันทึกข้อมูล</button>
         </div>
@@ -372,7 +361,7 @@
 
 
         <div class="d-flex justify-content-center mt-4">
-          <button type="button" onclick="booksubmitFormgeneraluser()" class="btn bg-primary col-12 text-white"><i
+          <button type="submit" onclick="booksubmitFormgeneraluser()" class="btn bg-primary col-12 text-white"><i
               class="fas fa-paper-plane"></i>
             บันทึกข้อมูล</button>
         </div>
@@ -483,7 +472,9 @@
           // Handle the successful response
           console.log(data);
           if (data == "true") {
-            document.getElementById('bookmyFormadmin').reset();
+      document.getElementById('nameageadmin').value="";
+      document.getElementById('nameteladmin').value="";
+      document.getElementById('nameemailadmin').value="";
             Swal.fire({
               position: 'center',
               icon: 'success',
@@ -591,7 +582,9 @@
           // Handle the successful response
           console.log(data);
           if (data == "true") {
-            document.getElementById('bookmyFormuser').reset();
+      document.getElementById('nameageuser').value="";
+      document.getElementById('nameteluser').value="";
+      document.getElementById('nameemailuser').value="";
             Swal.fire({
               position: 'center',
               icon: 'success',
@@ -699,7 +692,9 @@
           // Handle the successful response
           console.log(data);
           if (data == "true") {
-            document.getElementById('bookmyFormgeneraluser').reset();
+      document.getElementById('nameagegeneraluser').value="";
+      document.getElementById('nametelgeneraluser').value="";
+      document.getElementById('nameemailgeneraluser').value="";
             Swal.fire({
               position: 'center',
               icon: 'success',
@@ -746,7 +741,7 @@
         Swal.fire({
           position: 'center',
           icon: 'error',
-          title: '<h4>รหัสผ่านต้องประกอบด้วยตัวเลขหรืออักษรภาษาอังกฤษอย่างน้อย 1 ตัวอักษร</h4>',
+          title: '<h4>รหัสผ่านต้องประกอบด้วยตัวเลขหรืออักษรภาษาอังกฤษอย่างน้อย 1 ตัวอักษรและไม่ต่ำกว่า6หลัก</h4>',
           showConfirmButton: true,
           confirmButtonText: 'OK',
         });
@@ -873,19 +868,19 @@
         .then(response => response.json()) // แปลง response เป็น JSON
         .then(data => {
           if (data !== false) {
-            var username = data.username;
-            var password = data.password;
-            var fname = data.name;
-            var dep = data.dep;
-            var status = data.status;
-            if (status === 'admin') {
-              localStorage.setItem('status', status);
-              localStorage.setItem('fname', fname);
-              localStorage.setItem('dep', dep);
+            var usernamelogin = data.username;
+            var passwordlogin = data.password;
+            var fnamelogin = data.name;
+            var deplogin = data.dep;
+            var statuslogin = data.status;
+            if (statuslogin === 'admin') {
+              localStorage.setItem('statuslogin', statuslogin);
+              localStorage.setItem('fnamelogin', fnamelogin);
+              localStorage.setItem('deplogin', deplogin);
               Swal.fire({
                 position: 'center',
                 icon: 'success',
-                title: '<h4>ยินดีต้อนรับ<br>คุณ ' + fname + '</h4>',
+                title: '<h4>ยินดีต้อนรับ<br>คุณ ' + fnamelogin + '</h4>',
                 showConfirmButton: false,
                 timer: 1500,
               });
@@ -893,16 +888,16 @@
               $('#carduser').hide();
               $('#cardgeneraluser').hide();
               $('#page2').show();
-              $('#namebookadmin').val(fname);
-              $('#namedepadmin').val(dep);
-            }else if (status === 'user') {
-                localStorage.setItem('status', status);
-                localStorage.setItem('fname', fname);
-                localStorage.setItem('dep', dep);
+              $('#namebookadmin').val(fnamelogin);
+              $('#namedepadmin').val(deplogin);
+            }else if (statuslogin === 'user') {
+                localStorage.setItem('statuslogin', statuslogin);
+                localStorage.setItem('fnamelogin', fnamelogin);
+                localStorage.setItem('deplogin', deplogin);
                 Swal.fire({
                   position: 'center',
                   icon: 'success',
-                  title: '<h4>ยินดีต้อนรับ<br>คุณ ' + fname + '</h4>',
+                  title: '<h4>ยินดีต้อนรับ<br>คุณ ' + fnamelogin + '</h4>',
                   showConfirmButton: false,
                   timer: 1500,
                 });
@@ -910,16 +905,16 @@
                 $('#cardadmin').hide();
                 $('#cardgeneraluser').hide();
                 $('#page2').show();
-                $('#namebookuser').val(fname);
-                $('#namedepuser').val(dep);
-              }else if (status === 'generaluser') {
-              localStorage.setItem('status', status);
-              localStorage.setItem('fname', fname);
-              localStorage.setItem('dep', dep);
+                $('#namebookuser').val(fnamelogin);
+                $('#namedepuser').val(deplogin);
+              }else if (statuslogin === 'generaluser') {
+              localStorage.setItem('statuslogin', statuslogin);
+              localStorage.setItem('fnamelogin', fnamelogin);
+              localStorage.setItem('deplogin', deplogin);
               Swal.fire({
                 position: 'center',
                 icon: 'success',
-                title: '<h4>ยินดีต้อนรับ<br>คุณ ' + fname + '</h4>',
+                title: '<h4>ยินดีต้อนรับ<br>คุณ ' + fnamelogin + '</h4>',
                 showConfirmButton: false,
                 timer: 1500,
               });
@@ -927,8 +922,8 @@
               $('#cardadmin').hide();
               $('#carduser').hide();
               $('#page2').show();
-              $('#namebookgeneraluser').val(fname);
-              $('#namedepgeneraluser').val(dep);
+              $('#namebookgeneraluser').val(fnamelogin);
+              $('#namedepgeneraluser').val(deplogin);
             }
           } else {
             Swal.fire({
@@ -952,7 +947,37 @@
         });
     }
 
+    // ในส่วนที่เพิ่มเติมนี้ เราจะใช้ localStorage.getItem() เพื่อตรวจสอบว่ามีข้อมูลที่เราต้องการอยู่ใน Local Storage หรือไม่
+    document.addEventListener('DOMContentLoaded', function () {
+      var storedStatuslogin = localStorage.getItem('statuslogin');
+      var storedFnamelogin = localStorage.getItem('fnamelogin');
+      var storedDeplogin = localStorage.getItem('deplogin');
 
+      if (storedStatuslogin === 'admin' && storedFnamelogin && storedDeplogin) {
+        $('#page1').hide();
+        $('#carduser').hide();
+        $('#cardgeneraluser').hide();
+        $('#page2').show();
+        $('#namebookadmin').val(storedFnamelogin);
+        $('#namedepadmin').val(storedDeplogin);
+      }else if (storedStatuslogin === 'user' && storedFnamelogin && storedDeplogin) {
+        $('#page1').hide();
+        $('#cardadmin').hide();
+        $('#cardgeneraluser').hide();
+        $('#page2').show();
+        $('#namebookuser').val(storedFnamelogin);
+        $('#namedepuser').val(storedDeplogin);
+        }else if (storedStatuslogin === 'generaluser' && storedFnamelogin && storedDeplogin) {
+        $('#page1').hide();
+        $('#cardadmin').hide();
+        $('#carduser').hide();
+        $('#page2').show();
+        $('#namebookgeneraluser').val(storedFnamelogin);
+        $('#namedepgeneraluser').val(storedDeplogin);
+      }
+    });
+
+    
     function logout() {
       Swal.fire({
         title: 'คุณต้องการออกจากระบบหรือไม่?',
@@ -966,40 +991,14 @@
         if (result.isConfirmed) {
           document.getElementById('page2').style.display = 'none';
           document.getElementById('page1').style.display = 'block';
+          document.getElementById('loginForm').reset();
           localStorage.clear();
+          location.reload();
         }
       });
     }
 
-    // ในส่วนที่เพิ่มเติมนี้ เราจะใช้ localStorage.getItem() เพื่อตรวจสอบว่ามีข้อมูลที่เราต้องการอยู่ใน Local Storage หรือไม่
-    document.addEventListener('DOMContentLoaded', function () {
-      var storedStatus = localStorage.getItem('status');
-      var storedFname = localStorage.getItem('fname');
-      var storedDep = localStorage.getItem('dep');
 
-      if (storedStatus === 'admin' && storedFname && storedDep) {
-        $('#page1').hide();
-        $('#carduser').hide();
-        $('#cardgeneraluser').hide();
-        $('#page2').show();
-        $('#namebookadmin').val(storedFname);
-        $('#namedepadmin').val(storedDep);
-      }else if (storedStatus === 'user' && storedFname && storedDep) {
-        $('#page1').hide();
-        $('#cardadmin').hide();
-        $('#cardgeneraluser').hide();
-        $('#page2').show();
-        $('#namebookuser').val(storedFname);
-        $('#namedepuser').val(storedDep);
-        }else if (storedStatus === 'generaluser' && storedFname && storedDep) {
-        $('#page1').hide();
-        $('#cardadmin').hide();
-        $('#carduser').hide();
-        $('#page2').show();
-        $('#namebookgeneraluser').val(storedFname);
-        $('#namedepgeneraluser').val(storedDep);
-      }
-    });
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
